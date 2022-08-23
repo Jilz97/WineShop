@@ -13,10 +13,6 @@ public class Region {
 	@Column(name = "id")
 	private int id;
 	
-	public Region() {
-		
-	}
-	
 	private String name;
 	private String country;
 	

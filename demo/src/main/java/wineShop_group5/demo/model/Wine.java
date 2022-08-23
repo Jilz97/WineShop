@@ -1,22 +1,31 @@
 package wineShop_group5.demo.model;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="wine")
-public class wine {
+public class Wine {
 	@Id
     private int id;
 
     private String name;
-    private int year;
+    private String year;
     private float rating;
+    
+    @Column(name="num_reviews")
     private int num_reviews;
+    
+    @Column(name="price")
     private float price;
-    private int body;
-    private int acidity;
+    
+    @Column(name="body")
+    private String body;
+    @Column(name="acidity")
+    private String acidity;
     
     @ManyToOne
     @JoinColumn(name="winery_id")
@@ -30,14 +39,14 @@ public class wine {
     @JoinColumn(name="region_id")
     Region region;
     
-   
-    public wine() {
+    public Wine() {
     	
     }
-    
-	
-	public wine(int id, String name, int year, float rating, int num_reviews, float price, int body, int acidity,
-			Winery winery, Type type, Region region) {
+   
+
+
+	public Wine(int id, String name, String year, float rating, int num_reviews, float price, String body,
+			String acidity, Winery winery, Type type, Region region) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -51,6 +60,7 @@ public class wine {
 		this.type = type;
 		this.region = region;
 	}
+
 
 
 	public Winery getWinery() {
@@ -93,11 +103,11 @@ public class wine {
 		this.name = name;
 	}
 
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 
@@ -125,20 +135,50 @@ public class wine {
 		this.price = price;
 	}
 
-	public int getBody() {
+	public String getBody() {
 		return body;
 	}
 
-	public void setBody(int body) {
+	public void setBody(String body) {
 		this.body = body;
 	}
 
-	public int getAcidity() {
+	public String getAcidity() {
 		return acidity;
 	}
 
-	public void setAcidity(int acidity) {
+	public void setAcidity(String acidity) {
 		this.acidity = acidity;
 	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Wine other = (Wine) obj;
+		return id == other.id && Objects.equals(name, other.name);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Wine [id=" + id + ", name=" + name + ", year=" + year + ", rating=" + rating + ", num_reviews="
+				+ num_reviews + ", price=" + price + ", body=" + body + ", acidity=" + acidity + ", winery=" + winery
+				+ ", type=" + type + ", region=" + region + "]";
+	}
+
+
+
     
 }

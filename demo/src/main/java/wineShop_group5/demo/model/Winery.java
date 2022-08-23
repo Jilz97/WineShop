@@ -6,14 +6,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="winery")
-public class winery {
+public class Winery {
 	
 	
 	@Id
 	private Integer id;
 	private String name;
 	
-	public winery(String name) {
+	public Winery() {
+		
+	}
+	public Winery(String name) {
 		this.name = name;
 	}
 

@@ -6,12 +6,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name= "type")
-public class type {
+public class Type {
 	
 	@Id
 	private int id;
 	
 	private String name;
+	
+	public Type() {
+		
+	}
 
 	public int getId() {
 		return id;

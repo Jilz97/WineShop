@@ -12,6 +12,10 @@ public class Type {
 	private int id;
 	
 	private String name;
+	
+	public Type() {
+		
+	}
 
 	public int getId() {
 		return id;

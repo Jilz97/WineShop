@@ -1,4 +1,4 @@
-package wineShop_group5.model;
+package wineShop_group5.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

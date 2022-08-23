@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="wine")
-public class wine {
+public class Wine {
 	@Id
     private int id;
 
@@ -31,12 +31,12 @@ public class wine {
     Region region;
     
    
-    public wine() {
+    public Wine() {
     	
     }
     
 	
-	public wine(int id, String name, int year, float rating, int num_reviews, float price, int body, int acidity,
+	public Wine(int id, String name, int year, float rating, int num_reviews, float price, int body, int acidity,
 			Winery winery, Type type, Region region) {
 		super();
 		this.id = id;

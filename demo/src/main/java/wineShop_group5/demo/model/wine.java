@@ -17,18 +17,27 @@ public class wine {
     private float price;
     private int body;
     private int acidity;
-    //@JoinTable(name="winery", joinColumns(name="id"))
-    private int winery_id;
-    private int type_id;
-    private int region_id;
+    
+    @ManyToOne
+    @JoinColumn(name="winery_id")
+    Winery winery;
+   
+    @ManyToOne
+    @JoinColumn(name="type_id")
+    Type type;
+    
+    @ManyToOne
+    @JoinColumn(name="region_id")
+    Region region;
     
    
     public wine() {
     	
     }
     
+	
 	public wine(int id, String name, int year, float rating, int num_reviews, float price, int body, int acidity,
-			int winery_id, int type_id, int region_id) {
+			Winery winery, Type type, Region region) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,9 +47,34 @@ public class wine {
 		this.price = price;
 		this.body = body;
 		this.acidity = acidity;
-		this.winery_id = winery_id;
-		this.type_id = type_id;
-		this.region_id = region_id;
+		this.winery = winery;
+		this.type = type;
+		this.region = region;
+	}
+
+
+	public Winery getWinery() {
+		return winery;
+	}
+
+	public void setWinery(Winery winery) {
+		this.winery = winery;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 
 	public int getId() {

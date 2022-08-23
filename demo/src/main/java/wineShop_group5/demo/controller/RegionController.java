@@ -5,20 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import wineShop_group5.demo.model.Winery;
-import wineShop_group5.demo.repository.MySqlRepository;
-
+import wineShop_group5.demo.model.Region;
+import wineShop_group5.demo.repository.RegionRepository;
 @RestController
-public class WineryController {
-	
+public class RegionController {
 	@Autowired
-	MySqlRepository mySqlRepository;
+	RegionRepository RegionRepository;
 	
-	@GetMapping("/get-all-wine")
-	public List<Winery> getAllWine() {
-		return mySqlRepository.findAll();
+	@GetMapping("/get-all-region")
+	public List<Region> getAllRegion() {
+		return RegionRepository.findAll();
 		
-	}
-
+	
+}
 }

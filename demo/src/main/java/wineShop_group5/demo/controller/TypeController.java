@@ -6,19 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import wineShop_group5.demo.model.Winery;
-import wineShop_group5.demo.repository.MySqlRepository;
+import wineShop_group5.demo.model.Type;
+import wineShop_group5.demo.repository.TypeRepository;
 
 @RestController
-public class WineryController {
-	
+public class TypeController {
 	@Autowired
-	MySqlRepository mySqlRepository;
+	TypeRepository TypeRepository;
 	
-	@GetMapping("/get-all-wine")
-	public List<Winery> getAllWine() {
-		return mySqlRepository.findAll();
+	@GetMapping("/get-all-type")
+	public List<Type> getAllType() {
+		return TypeRepository.findAll();
 		
-	}
-
+}
 }

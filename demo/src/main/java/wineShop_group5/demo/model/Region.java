@@ -12,6 +12,9 @@ public class Region {
 	private String region_name;
 	private String country_name;
 	
+	public Region() {
+		
+	}
 	
 	public int getRegion_id() {
 		return region_id;

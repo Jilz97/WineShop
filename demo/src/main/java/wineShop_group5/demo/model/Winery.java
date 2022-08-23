@@ -16,10 +16,11 @@ public class Winery {
 	public Winery() {
 		
 	}
+
 	public Winery(String name) {
 		this.name = name;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}

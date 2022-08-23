@@ -1,35 +1,57 @@
 package wineShop_group5.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "region")
 public class Region {
 	
 	@Id
-	private int region_id;
+	@Column(name = "id")
+	private int id;
 	
-	private String region_name;
-	private String country_name;
+	private String name;
+	private String country;
 	
+	public Region(){
 	
-	public int getRegion_id() {
-		return region_id;
 	}
-	public void setRegion_id(int region_id) {
-		this.region_id = region_id;
+
+	public Region(int id, String name, String country) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.country = country;
 	}
-	public String getRegion_name() {
-		return region_name;
+
+
+
+	public int getId() {
+		return id;
 	}
-	public void setRegion_name(String region_name) {
-		this.region_name = region_name;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getCountry_name() {
-		return country_name;
+
+	public String getName() {
+		return name;
 	}
-	public void setCountry_name(String country_name) {
-		this.country_name = country_name;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	
 }

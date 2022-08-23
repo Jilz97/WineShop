@@ -1,17 +1,27 @@
 package wineShop_group5.demo.model;
 
+import java.util.Optional;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import wineShop_group5.demo.repository.TypeRepository;
+
 @Entity
+
 @Table(name= "type")
+
 public class Type {
 	
 	@Id
 	private int id;
 	
 	private String name;
+	
+	public Type() {
+		
+	}
 
 	public int getId() {
 		return id;
@@ -27,6 +37,7 @@ public class Type {
 
 	public void setName(String name) {
 		this.name = name;
-	}
+		
 	
+}
 }

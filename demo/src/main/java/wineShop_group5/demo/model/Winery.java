@@ -13,6 +13,9 @@ public class Winery {
 	private Integer id;
 	private String name;
 	
+	public Winery() {
+		
+	}
 	public Winery(String name) {
 		this.name = name;
 	}

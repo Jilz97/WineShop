@@ -12,8 +12,7 @@ public class Region {
 	@Id
 	@Column(name = "id")
 	private int id;
-	
-	
+		
 	private String name;
 	private String country;
 	
@@ -27,8 +26,6 @@ public class Region {
 		this.name = name;
 		this.country = country;
 	}
-
-
 
 	public int getId() {
 		return id;

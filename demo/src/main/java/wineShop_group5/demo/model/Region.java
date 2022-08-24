@@ -12,7 +12,7 @@ public class Region {
 	@Id
 	@Column(name = "id")
 	private int id;
-		
+
 	private String name;
 	private String country;
 	

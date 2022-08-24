@@ -48,8 +48,8 @@ public class WineController {
 		wine1.setBody(wine.getBody());
 		wine1.setPrice(wine.getPrice());
 		wine1.setAcidity(wine.getAcidity());
-		wineRepository.save(wine1);
-		return wine1;
+		
+		return wineRepository.save(wine1);
 	}
 
 	@DeleteMapping("/delete/{id}")

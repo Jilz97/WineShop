@@ -21,17 +21,25 @@ class WineTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	
+	//Test all Wines
 	@Test
 	void allWines() throws Exception{
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/wine/all").contentType("application/json")).andExpect(status().isOk());
 	}
-	
+	//Test get Wine by Id
 	@Test
 	void idOne() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/wine/1").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(jsonPath("$.id", Matchers.is(1)))
 		.andExpect(jsonPath("$.name",Matchers.is("Tinto")));
 	}
+	
+	//Test create
+	
+	//test update
+	
+	//Test delete
+	
+	
 
 }

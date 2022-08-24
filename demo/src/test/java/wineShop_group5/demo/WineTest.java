@@ -3,7 +3,7 @@ package wineShop_group5.demo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -36,15 +36,12 @@ class WineTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@Mock
+	@MockBean
 	WineServices wineServices;
 
 	@Autowired
 	private ObjectMapper objectMapper;
 
-
-	
-	
 	// Test all Wines
 	@Test
 	void allWinesTest() throws Exception {
@@ -55,22 +52,23 @@ class WineTest {
 	// Test get Wine by Id
 	@Test
 	void idOne() throws Exception {
-		mockMvc.perform(get("/api/wine/1").contentType(MediaType.APPLICATION_JSON)).andExpect(jsonPath("$.id", is(1)))
-		.andExpect(jsonPath("$.name", is("Tinto")));
+		Wine wine = new Wine();
+		given(wineServices.getWineId(1)).
+		mockMvc.perform(get("/api/wine/1").contentType(MediaType.APPLICATION_JSON)).content(wine).andExpect(jsonPath("$.id", is(1)))
+				.andExpect(jsonPath("$.name", is("Tinto")));
 	}
 
 	// Test create
 	@Test
 	public void addWineTest() throws Exception {
 		Wine wine = new Wine();
-		wine.setName("adeu");
-
+		wine.setName("createTest");
 		given(wineServices.createWine(wine)).willAnswer((invocation) -> invocation.getArgument(0));
 
 		ResultActions response = mockMvc.perform(post("/api/wine/create").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(wine)));
 
-		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("adeu")));
+		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("createTest")));
 
 	}
 
@@ -79,7 +77,7 @@ class WineTest {
 	public void updateWineTest() throws Exception {
 		Wine wine = new Wine();
 		wine.setName("prova");
-		//me devuelve el wine 5
+		// me devuelve el wine 5
 		Mockito.when(wineServices.updateWine(5, wine)).thenReturn(wine);
 
 		ResultActions response = mockMvc.perform(put("/api/wine/update/5").contentType(MediaType.APPLICATION_JSON)
@@ -87,11 +85,15 @@ class WineTest {
 
 		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("prova")));
 	}
+
 	// Test delete
 	@Test
 	public void deleteWineTest() throws Exception {
-//		Wine wine = new Wine();
-//		mockMvc.perform(delete("/api/wine/delete/10")).andExpect(status().isOk());
+		int id = 2;
+		willDoNothing().given(wineServices).deleteWine(id);
+		ResultActions response = mockMvc.perform(delete("/api/wine/delete/{id}", id));
+		response.andExpect(status().isOk()).andDo(print());
+
 	}
 
 }

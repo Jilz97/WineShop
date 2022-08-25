@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,8 +42,9 @@ class RegionControllerTest {
 	
 	@Test
 	void all() throws Exception {
-		mockMvc.perform(get("/api/region/")
-				.contentType("aplication/json"));
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/region/all")
+				.contentType("aplication/json"))
+				.andExpect(status().isOk());
 	}
 	@Test
 	void one() throws Exception{

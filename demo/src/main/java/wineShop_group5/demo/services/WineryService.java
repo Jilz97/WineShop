@@ -24,10 +24,7 @@ public class WineryService {
 	    public Winery getById(Long id) throws NotFoundException {
 	        return mySqlRepository.findById(id).orElseThrow(() -> new NotFoundException());
 	    }
-	    	
-	        
 	    
-
 	    public Winery save(Winery winery) {
 	        return mySqlRepository.save(winery);
 	    }

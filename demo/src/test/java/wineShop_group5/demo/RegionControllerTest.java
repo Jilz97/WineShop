@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -65,6 +66,8 @@ class RegionControllerTest {
 		Region region = new Region();
 		region.setName("prova");
 		region.setId(200);
+		region.setCountry("prova");
+		
 		
 		Mockito.when(regionService.saveRegion(region)).thenReturn(region);
 				
@@ -74,25 +77,26 @@ class RegionControllerTest {
 		
 		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("prova")));
 	}
-/*
+
 	@Test
 	@WithMockUser(username = "user", roles= {"USER"})
 	void updateRegionTest() throws Exception{
 		Region region = new Region();
 		region.setName("prova");
-		region.setId(100);
-		Mockito.when(regionService.updateRegion(100,region)).thenReturn(region);
+		region.setId(10);
+		region.setCountry("prova");
 		
+		Mockito.when(regionService.updateRegion(10,region)).thenReturn(region);
 		
-		
-		ResultActions response=mockMvc.perform(put("/api/region/update")
+				
+		ResultActions response=mockMvc.perform(put("/api/region/update/{id}",10)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(region)));
 		
 		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("prova")));
 				
 	}
-*/
+
 	@Test
 	@WithMockUser(username = "admin", roles= {"ADMIN"})
 	void deleteRegionTest() throws Exception{

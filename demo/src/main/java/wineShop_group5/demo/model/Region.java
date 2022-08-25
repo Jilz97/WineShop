@@ -2,8 +2,10 @@ package wineShop_group5.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="region")
 public class Region {
 	
 	@Id
@@ -12,6 +14,9 @@ public class Region {
 	private String region_name;
 	private String country_name;
 	
+	public Region() {
+		
+	}
 	
 	public int getRegion_id() {
 		return region_id;

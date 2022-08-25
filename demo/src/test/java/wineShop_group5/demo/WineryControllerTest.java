@@ -1,8 +1,8 @@
 package wineShop_group5.demo;
 
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -36,90 +36,63 @@ import wineShop_group5.demo.services.WineryService;
 @AutoConfigureMockMvc
 
 public class WineryControllerTest {
-	
+
 	@Autowired
 	private MockMvc mvc;
-	
-	@Autowired 
+
+	@Autowired
 	private ObjectMapper objectMapper;
-	
-	@Mock
+
+	@MockBean
 	WineryService wineryService;
-	
-	//Get all
-	@Test 
-	public void getAllWineryAPI() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/api/winery/all")
-		.accept(MediaType.APPLICATION_JSON))
-		.andDo(print())
-		.andExpect(status().isOk());
-}
-	
-	//get all by ID
+
+	// Get all
 	@Test
-	public void getWinaryByIdAPI() throws Exception 
-	{
-	  mvc.perform( MockMvcRequestBuilders
-	      .get("/api/winery/{identity}", 17)
-	      .accept(MediaType.APPLICATION_JSON))
-	      .andDo(print())
-	      .andExpect(status().isOk());
-	     
+	public void getAllWineryAPI() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/api/winery/all").accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk());
 	}
-	
-	//test post
-	 @Test
-	 void postWinaryAPI() throws Exception {
-	        ObjectMapper mapa = new ObjectMapper();
-	        mapa.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-	        ObjectWriter ow = mapa.writer().withDefaultPrettyPrinter();
-	        String requestJson = ow.writeValueAsString(new Winery());
 
+	// get all by ID
+	@Test
+	public void getWinaryByIdAPI() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/api/winery/{identity}", 17).accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 
-	        mvc.perform(post("/api/winery/create")
-	                        .contentType(MediaType.APPLICATION_JSON)
-	                        .content(requestJson)
-	                )
-	                .andExpect(status().isCreated());
-	    }
-	    
-	 
-	 //Test Update
-	 @Test
-	  void updateWinaryTestApi() throws Exception {
-		 /*
-		 Winery winery = new Winery();
-		 winery.setName("Bodegas");
-		 winery.setId(502);
-		 Mockito.when(wineryService.update(winery)).thenReturn(winery);
-		 
-		 ResultActions response=mvc.perform(put("/"))
-		 */
-		 ObjectMapper mapa = new ObjectMapper();
-	        mapa.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-	        ObjectWriter ow = mapa.writer().withDefaultPrettyPrinter();
-	        String requestJson = ow.writeValueAsString(new Winery("GFT"));
-	        mvc.perform(put("/api/winery/put/{identity}",17)
-	                        .contentType(MediaType.APPLICATION_JSON)
-	                        .content(requestJson)
-	                )
-	                .andExpect(status().is2xxSuccessful());
-	 
-	 }
-        
-		
-	
+	}
 
-	
-	//delete test
-	
-	 @Test 
+	// test post
+	@Test
+	void postWinaryAPI() throws Exception {
+		ObjectMapper mapa = new ObjectMapper();
+		mapa.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapa.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(new Winery());
+
+		mvc.perform(post("/api/winery/create").contentType(MediaType.APPLICATION_JSON).content(requestJson))
+				.andExpect(status().isCreated());
+	}
+
+	// Test Update
+	@Test
+	void updateWinaryTestApi() throws Exception {
+
+		ObjectMapper mapa = new ObjectMapper();
+		mapa.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapa.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(new Winery("GFT"));
+		mvc.perform(put("/api/winery/put/{identity}", 17).contentType(MediaType.APPLICATION_JSON).content(requestJson))
+				.andExpect(status().is2xxSuccessful());
+
+	}
+
+	// delete test
+
+	@Test
 	void deleteWinreyAPI() throws Exception {
-		 mvc.perform(delete("/api/winery/delete/{identity}",526)
-                 .contentType(MediaType.APPLICATION_JSON)
-         )
-         .andExpect(status().is2xxSuccessful());
+		mvc.perform(delete("/api/winery/delete/{identity}", 512).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().is2xxSuccessful());
+
 	}
-	
 
 }

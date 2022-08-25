@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -61,6 +62,7 @@ class WineTest {
 
 	// Test create
 	@Test
+	@WithMockUser(username = "user", roles= {"USER"})
 	public void addWineTest() throws Exception {
 		wine.setId(7550);
 		wine.setName("createTest");
@@ -75,6 +77,7 @@ class WineTest {
 
 	// test update
 	@Test
+	@WithMockUser(username = "user", roles= {"USER"})
 	public void updateWineTest() throws Exception {
 		wine.setName("prova2");
 		wine.setId(5);
@@ -89,6 +92,7 @@ class WineTest {
 
 	// Test delete
 	@Test
+	@WithMockUser(username = "admin", roles= {"ADMIN"})
 	public void deleteWineTest() throws Exception {
 		int id = 2;
 		willDoNothing().given(wineServices).deleteWine(id);

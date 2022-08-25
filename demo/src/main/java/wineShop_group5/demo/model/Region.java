@@ -4,21 +4,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="region")
 public class Region {
-	
+
 	@Id
 	@Column(name = "id")
 	private int id;
-
-	private String name;
-	private String country;
 	
+	@NotNull(message = "It can't be null")
+	@NotBlank(message = "It must have a name")
+	private String name;
+	@NotNull(message = "It can't be null")
+	private String country;
+
 
 	public Region() {
-		
+
 	}
 
 	
@@ -55,5 +60,4 @@ public class Region {
 		this.country = country;
 	}
 
-	
 }

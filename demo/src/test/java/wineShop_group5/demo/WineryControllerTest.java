@@ -88,7 +88,7 @@ public class WineryControllerTest {
 	@Test
 	@WithMockUser(username = "admin", roles= {"ADMIN"})
 	void deleteWinreyAPI() throws Exception {
-		mvc.perform(delete("/api/winery/delete/{identity}", 512).contentType(MediaType.APPLICATION_JSON))
+		mvc.perform(delete("/api/winery/delete/{identity}", 480).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().is2xxSuccessful());
 
 	}

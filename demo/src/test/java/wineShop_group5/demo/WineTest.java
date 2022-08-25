@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.mockito.BDDMockito.*;
 import wineShop_group5.demo.controller.WineController;
 import wineShop_group5.demo.model.Wine;
+import wineShop_group5.demo.model.*;
 import wineShop_group5.demo.repository.WineRepository;
 import wineShop_group5.demo.services.WineServices;
 
@@ -41,6 +43,11 @@ class WineTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+	
+	Type type = new Type(5, "Red");
+	Winery winery = new Winery(1,"Teso La Monja");
+    Region region = new Region(1, "Toro", "España");
+    Wine wine = new Wine(1,"Tinto", "2002", 4.3f, 45, 38, "2", "2", winery, type, region);
 
 	// Test all Wines
 	@Test
@@ -52,9 +59,8 @@ class WineTest {
 	// Test get Wine by Id
 	@Test
 	void idOne() throws Exception {
-		Wine wine2 = new Wine();
-		wine2.setId(11);
-		given(wineServices.getWineId(11)).willReturn(wine2);
+		wine.setId(11);
+		given(wineServices.getWineId(11)).willReturn(wine);
 		mockMvc.perform(get("/api/wine/11").contentType(MediaType.APPLICATION_JSON)).andExpect(jsonPath("$.id", is(11)));
 				//.andExpect(jsonPath("$.name", is("Tinto")));
 	}
@@ -62,7 +68,7 @@ class WineTest {
 	// Test create
 	@Test
 	public void addWineTest() throws Exception {
-		Wine wine = new Wine();
+		wine.setId(7550);
 		wine.setName("createTest");
 		given(wineServices.createWine(wine)).willAnswer((invocation) -> invocation.getArgument(0));
 
@@ -76,15 +82,15 @@ class WineTest {
 	// test update
 	@Test
 	public void updateWineTest() throws Exception {
-		Wine wine = new Wine();
-		wine.setName("prova");
+		wine.setName("prova2");
+		wine.setId(5);
 		// me devuelve el wine 5
 		Mockito.when(wineServices.updateWine(5, wine)).thenReturn(wine);
 
 		ResultActions response = mockMvc.perform(put("/api/wine/update/5").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(wine)));
 
-		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("prova")));
+		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("prova2")));
 	}
 
 	// Test delete

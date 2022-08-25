@@ -2,6 +2,8 @@ package wineShop_group5.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +37,14 @@ public class WineController {
 	}
 
 	@PostMapping("/create")
-	public Wine createWine(@RequestBody Wine wine){
-		return wineServices.createWine(wine);
+	public ResponseEntity<Wine> createWine(@Valid @RequestBody Wine wine) throws Exception{
+		return new ResponseEntity<>(wineServices.createWine(wine),HttpStatus.OK);
 	}
 
 	@PutMapping("/update/{id}")
-	public Wine updateWine(@PathVariable int id, @RequestBody Wine wine) throws Exception{
-		return wineServices.updateWine(id, wine);
+	public ResponseEntity<Wine> updateWine(@PathVariable int id, @RequestBody Wine wine) throws Exception{
+		wineServices.updateWine(id, wine);
+		return new ResponseEntity<Wine>(wine, HttpStatus.OK); 
 	}
 
 	@DeleteMapping("/delete/{id}")

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="wine")
 public class Wine {

@@ -5,46 +5,66 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.Range;
 
 
 @Entity
-@Table(name="wine")
+@Table(name = "wine")
 public class Wine {
 	@Id
-    private int id;
+	private int id;
+	
+	@NotNull(message = "Can't be null")
+	@NotBlank(message="Must have a name")
+	private String name;
 
-    private String name;
-    private String year;
-    private float rating;
-    
-    @Column(name="num_reviews")
-    private int num_reviews;
-    
-    @Column(name="price")
-    private float price;
-    
-    @Column(name="body")
-    private String body;
-    @Column(name="acidity")
-    private String acidity;
-    
-    @ManyToOne
-    @JoinColumn(name="winery_id")
-    Winery winery;
-   
-    @ManyToOne
-    @JoinColumn(name="type_id")
-    Type type;
-    
-    @ManyToOne
-    @JoinColumn(name="region_id")
-    Region region;
-    
-    public Wine() {
-    	
-    }
-   
+	@NotNull(message = "Can't be null")
+	@Range(min = 1990, max = 2022)
+	private String year;
 
+	@NotNull(message = "Can't be null")
+	@Range(min = 0, max = 5,  message = "Must be between 1 to 5")
+	private float rating;
+
+	@NotNull(message = "Can't be null")
+	@Min(value = 0, message = "Must be positive Number")
+	@Column(name = "num_reviews")
+	private int num_reviews;
+
+	@NotNull(message = "Can't be null")
+	@Min(value = 0, message = "Must be positive Number")
+	@Column(name = "price")
+	private float price;
+
+	@NotNull(message = "Can't be null")
+	@Range(min = 1, max = 5, message = "Must be between 1 to 5")
+	@Column(name = "body")
+	private String body;
+
+	@NotNull(message = "Can't be null")
+	@Range(min = 1, max = 5)
+	@Column(name = "acidity")
+	private String acidity;
+
+	@ManyToOne
+	@NotNull(message = "Can't be null")
+	@JoinColumn(name = "winery_id")
+	Winery winery;
+
+	@ManyToOne
+	@NotNull(message = "Can't be null")
+	@JoinColumn(name = "type_id")
+	Type type;
+
+	@ManyToOne
+	@NotNull(message = "Can't be null")
+	@JoinColumn(name = "region_id")
+	Region region;
+
+	public Wine() {
+
+	}
 
 	public Wine(int id, String name, String year, float rating, int num_reviews, float price, String body,
 			String acidity, Winery winery, Type type, Region region) {
@@ -61,8 +81,6 @@ public class Wine {
 		this.type = type;
 		this.region = region;
 	}
-
-
 
 	public Winery getWinery() {
 		return winery;
@@ -152,12 +170,10 @@ public class Wine {
 		this.acidity = acidity;
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, name);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -171,7 +187,6 @@ public class Wine {
 		return id == other.id && Objects.equals(name, other.name);
 	}
 
-
 	@Override
 	public String toString() {
 		return "Wine [id=" + id + ", name=" + name + ", year=" + year + ", rating=" + rating + ", num_reviews="
@@ -179,5 +194,4 @@ public class Wine {
 				+ ", type=" + type + ", region=" + region + "]";
 	}
 
-    
 }

@@ -2,6 +2,8 @@ package wineShop_group5.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,11 @@ public class WineController {
 	}
 
 	@PostMapping("/create")
+<<<<<<< HEAD
 	public ResponseEntity<Wine> createWine(@RequestBody Wine wine) throws Exception{
+=======
+	public ResponseEntity<Wine> createWine(@Valid @RequestBody Wine wine) throws Exception{
+>>>>>>> gemma
 		return new ResponseEntity<>(wineServices.createWine(wine),HttpStatus.OK);
 	}
 

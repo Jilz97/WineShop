@@ -14,25 +14,16 @@ public class Region {
 	@Id
 	@Column(name = "id")
 	private int id;
-<<<<<<< HEAD
-
-=======
+	
 	@NotNull(message = "It can't be null")
 	@NotBlank(message = "It must have a name")
->>>>>>> gemma
 	private String name;
 	@NotNull(message = "It can't be null")
 	private String country;
-<<<<<<< HEAD
-	
 
-	public Region() {
-		
-=======
 
 	public Region() {
 
->>>>>>> gemma
 	}
 
 	

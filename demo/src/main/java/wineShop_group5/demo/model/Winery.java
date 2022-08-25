@@ -14,27 +14,23 @@ public class Winery {
 	
 	
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-=======
-	private Integer id;
-	@NotNull(message= "It can't be null")
+
+    @NotNull(message= "It can't be null")
 	@NotBlank(message="It must have a name")
->>>>>>> gemma
 	private String name;
 	
 	public Winery() {
 		
 	}
 
-	public Winery(Integer id, String name) {
+	public Winery(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
-
-	public Winery(String name) {
+	public Winery(String name){
 		this.name = name;
 	}
 

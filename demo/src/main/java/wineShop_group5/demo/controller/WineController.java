@@ -36,11 +36,8 @@ public class WineController {
 	}
 
 	@PostMapping("/create")
-<<<<<<< HEAD
-	public ResponseEntity<Wine> createWine(@RequestBody Wine wine) throws Exception{
-=======
+
 	public ResponseEntity<Wine> createWine(@Valid @RequestBody Wine wine) throws Exception{
->>>>>>> gemma
 		return new ResponseEntity<>(wineServices.createWine(wine),HttpStatus.OK);
 	}
 

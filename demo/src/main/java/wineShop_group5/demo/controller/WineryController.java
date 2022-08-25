@@ -21,6 +21,8 @@ public class WineryController {
 
 	@Autowired
 	WineryService wineryService;
+	
+	
 
 	@GetMapping("/all")
 	public List<Winery> getAllWinery() {
@@ -54,8 +56,14 @@ public class WineryController {
 	public ResponseEntity<String> delete(@PathVariable("identity") Long id) {
 		wineryService.delete(id);
 		return new ResponseEntity<>("Winery was deleted", null, 204);
+<<<<<<< HEAD
 	}
 
+=======
+
+	}
+	
+>>>>>>> samyr
 }
 
 

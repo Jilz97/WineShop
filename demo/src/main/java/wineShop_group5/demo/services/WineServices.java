@@ -1,6 +1,9 @@
 package wineShop_group5.demo.services;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,4 +46,39 @@ public class WineServices {
 	public void deleteWine(int id) {
 		wineRepository.deleteById(id);
 	}
+	
+	
+	//Best Wine Rating Service
+	public List<Wine> getBest(){
+        List<Wine> wines = getAllWine();
+        return wines.stream().filter((w)-> w.getRating()>=4.0)
+                .sorted(Comparator.comparingInt(Wine::getNum_reviews))
+                .limit(10)
+                .collect(Collectors.toList());
+    }
+	
+	//Get Expensive Wines TOP10
+	public List<Wine> getExpensive(){
+		List<Wine> wines = getAllWine();
+		return wines.stream().sorted(Comparator.comparingDouble(Wine::getPrice).reversed()).limit(10).collect(Collectors.toList());
+	}
+	
+	//Get Best bang rating-price (Opinion -> precio)
+	
+	
+	
+	
+	
+	//Get Best Vintage rated by years
+	public Map<String, List<Wine>> getYearsWithBestRatedWines(){
+        List<Wine> wines = getAllWine();
+        return wines.stream()
+                .sorted(
+                        Comparator.comparingInt(Wine::getNum_reviews).reversed()
+                        .thenComparingDouble(Wine::getRating).reversed())
+                		.collect(Collectors.groupingBy(Wine::getYear));
+    }
+	 
+	 
+	
 }

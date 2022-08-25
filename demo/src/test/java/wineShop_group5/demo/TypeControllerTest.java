@@ -17,14 +17,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 import wineShop_group5.demo.model.Type;
-import wineShop_group5.demo.service.TypeService;
+import wineShop_group5.demo.services.TypeServices;
 
 class TypeControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 	
 	@MockBean
-	TypeService typeService;
+	TypeServices typeService;
 	
 	@Test
 	void allTypeTest() throws Exception {

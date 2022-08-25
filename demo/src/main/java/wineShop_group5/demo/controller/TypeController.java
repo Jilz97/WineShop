@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import wineShop_group5.demo.model.Type;
-import wineShop_group5.demo.service.TypeService;
+import wineShop_group5.demo.services.TypeServices;
 
 @RestController
 @RequestMapping("/api/type")
 public class TypeController {
 	@Autowired
-	TypeService typeService;
+	TypeServices typeService;
 	
 	@GetMapping("/all")
 	public List<Type> getAllType() {

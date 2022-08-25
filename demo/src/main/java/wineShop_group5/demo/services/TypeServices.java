@@ -1,4 +1,4 @@
-package wineShop_group5.demo.service;
+package wineShop_group5.demo.services;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import wineShop_group5.demo.model.Type;
 import wineShop_group5.demo.repository.TypeRepository;
 
 @Service
-public class TypeService {
+public class TypeServices {
 	@Autowired
 	TypeRepository TypeRepository;
 	

@@ -25,14 +25,6 @@ import wineShop_group5.demo.services.WineryService;
 public class WineryController {
 
 	@Autowired
-
-	MySqlRepository mySqlRepository;
-	
-	@GetMapping("/api/winery")
-	public List<Winery> getAllWine() {
-		return mySqlRepository.findAll();
-		
-
 	WineryService wineryService;
 
 	@GetMapping("/all")
@@ -67,11 +59,6 @@ public class WineryController {
 	public ResponseEntity<String> delete(@PathVariable("identity") Long id) {
 		wineryService.delete(id);
 		return new ResponseEntity<>("Winery was deleted", null, 204);
-
-	}
-	@GetMapping("/api/winery/{identity}")
-	public Winery getSingleWine(@PathVariable("identity")Integer id) {
-	return mySqlRepository.findById(id).get();
 	}
 
 }

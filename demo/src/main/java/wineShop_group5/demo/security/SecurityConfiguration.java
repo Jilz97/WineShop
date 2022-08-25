@@ -49,6 +49,5 @@ public class SecurityConfiguration {
 		
 		return new InMemoryUserDetailsManager(user,admin);
 	}
-	
 
 }

@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import wineShop_group5.demo.model.Type;
-import wineShop_group5.demo.services.TypeServices;
+import wineShop_group5.demo.services.*;
 
 @RestController
 @RequestMapping("/api/type")
 public class TypeController {
 	@Autowired
-	TypeServices typeService;
+	TypeServices typeServices;
 	
 	@GetMapping("/all")
 	public List<Type> getAllType() {
-		return typeService.getAllType();
+		return typeServices.getAllType();
 				
 	}
 	@GetMapping("/{id}")
 	public Type getTypeId(@PathVariable Integer id) throws Exception{
-	return typeService.getTypeId(id);
+	return typeServices.getTypeId(id);
 			//.orElseThrow(()-> new Exception("Not found"));
 	}
 
 	@PostMapping("/create")
 	public Type createType (@RequestBody Type type){
-		typeService.createType(type);
+		typeServices.createType(type);
 		return type;
 	}
 
 	@PutMapping("/update/{id}")
 	public Type updateType(@PathVariable int id, @RequestBody Type type) throws Exception{
-		return typeService.updateType(id, type);
+		return typeServices.updateType(id, type);
 	}
 	@DeleteMapping("/delete/{id}")
 	public String deleteType(@PathVariable int id){
-		typeService.deleteType(id);
+		typeServices.deleteType(id);
 		return "Type" + id + "has been deleted";
 	}
 	

@@ -40,7 +40,7 @@ public class RegionController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public Region updateRegion(@PathVariable Integer id,@RequestBody Region region) throws Exception{
+	public Region updateRegion(@PathVariable int id,@RequestBody Region region) throws Exception{
 		return regionService.updateRegion(id,region);
 	}
 	

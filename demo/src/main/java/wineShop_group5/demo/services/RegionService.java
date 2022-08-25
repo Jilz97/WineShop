@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import wineShop_group5.demo.model.Region;
+import wineShop_group5.demo.model.Type;
 import wineShop_group5.demo.repository.RegionRepository;
 
 
@@ -32,11 +33,9 @@ public class RegionService {
 	}
 
 	public Region updateRegion(int id,Region region) throws Exception{
-		Region region1= new Region();
-		region1.setId(id);
-		region1.setCountry(region.getCountry());
+		Region region1 = getRegionId(id);
 		region1.setName(region.getName());
-		
+		region1.setCountry(region.getCountry());	
 		return regionRepository.save(region1);
 		
 	}

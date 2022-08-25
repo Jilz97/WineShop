@@ -28,7 +28,8 @@ public class SecurityConfiguration {
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.csrf()
-			.disable();
+			.disable()
+			.httpBasic();
 		return http.build();
 	}
 
@@ -39,17 +40,15 @@ public class SecurityConfiguration {
 							  .password("password")
 							  .roles("USER")
 							  .build();
-		return new InMemoryUserDetailsManager(user);
+		
+		UserDetails admin= User.withDefaultPasswordEncoder()
+				  .username("admin")
+				  .password("admin")
+				  .roles("ADMIN","USER")
+				  .build();
+		
+		return new InMemoryUserDetailsManager(user,admin);
 	}
 	
-	@Bean
-	public InMemoryUserDetailsManager adminDetails() {
-		UserDetails admin= User.withDefaultPasswordEncoder()
-							  .username("admin")
-							  .password("admin")
-							  .roles("ADMIN")
-							  .build();
-		return new InMemoryUserDetailsManager(admin);
-	}
 
 }

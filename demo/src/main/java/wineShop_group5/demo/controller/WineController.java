@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import wineShop_group5.demo.model.Wine;
-import wineShop_group5.demo.repository.WineRepository;
 import wineShop_group5.demo.services.WineServices;
 
 @RestController
@@ -35,13 +34,14 @@ public class WineController {
 	}
 
 	@PostMapping("/create")
-	public Wine createWine(@RequestBody Wine wine){
-		return wineServices.createWine(wine);
+	public ResponseEntity<Wine> createWine(@RequestBody Wine wine) throws Exception{
+		return new ResponseEntity<>(wineServices.createWine(wine),HttpStatus.OK);
 	}
 
 	@PutMapping("/update/{id}")
-	public Wine updateWine(@PathVariable int id, @RequestBody Wine wine) throws Exception{
-		return wineServices.updateWine(id, wine);
+	public ResponseEntity<Wine> updateWine(@PathVariable int id, @RequestBody Wine wine) throws Exception{
+		wineServices.updateWine(id, wine);
+		return new ResponseEntity<Wine>(wine, HttpStatus.OK); 
 	}
 
 	@DeleteMapping("/delete/{id}")

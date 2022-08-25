@@ -85,13 +85,13 @@ class RegionControllerTest {
 	void updateRegionTest() throws Exception{
 		Region region = new Region();
 		region.setName("prova");
-		region.setId(10);
+		region.setId(11);
 		region.setCountry("prova");
 		
-		Mockito.when(regionService.updateRegion(10,region)).thenReturn(region);
+		Mockito.when(regionService.updateRegion(11,region)).thenReturn(region);
 		
 				
-		ResultActions response=mockMvc.perform(put("/api/region/update/{id}",10)
+		ResultActions response=mockMvc.perform(put("/api/region/update/{id}",11)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(region)));
 		

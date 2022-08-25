@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "region")
+@Table(name="region")
 public class Region {
 	
 	@Id
@@ -16,9 +16,13 @@ public class Region {
 	private String name;
 	private String country;
 	
-	public Region(){
-	
+
+	public Region() {
+		
 	}
+
+	
+	
 
 	public Region(int id, String name, String country) {
 		super();

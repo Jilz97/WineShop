@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -64,6 +65,7 @@ class RegionControllerTest {
 	void addRegionTest() throws Exception{
 		Region region = new Region();
 		region.setName("prova");
+		region.setCountry("prova");
 		region.setId(200);
 		
 		Mockito.when(regionService.saveRegion(region)).thenReturn(region);
@@ -85,7 +87,7 @@ class RegionControllerTest {
 		
 		
 		
-		ResultActions response=mockMvc.perform(put("/api/region/update")
+		ResultActions response=mockMvc.perform(put("/api/region/update/100")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(region)));
 		

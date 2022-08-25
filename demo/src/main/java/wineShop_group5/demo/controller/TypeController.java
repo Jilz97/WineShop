@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import wineShop_group5.demo.model.Region;
 import wineShop_group5.demo.model.Type;
 import wineShop_group5.demo.repository.TypeRepository;
 

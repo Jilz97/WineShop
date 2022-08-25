@@ -10,18 +10,18 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "region")
 public class Region {
-	
+
 	@Id
 	@Column(name = "id")
 	private int id;
-	@NotNull(message= "It can't be null")
-	@NotBlank(message="It must have a name")
+	@NotNull(message = "It can't be null")
+	@NotBlank(message = "It must have a name")
 	private String name;
-	@NotNull(message= "It can't be null")
+	@NotNull(message = "It can't be null")
 	private String country;
-	
-	public Region(){
-	
+
+	public Region() {
+
 	}
 
 	public Region(int id, String name, String country) {
@@ -30,8 +30,6 @@ public class Region {
 		this.name = name;
 		this.country = country;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -57,5 +55,4 @@ public class Region {
 		this.country = country;
 	}
 
-	
 }

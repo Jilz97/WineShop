@@ -19,10 +19,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.mockito.BDDMockito.*;
-import wineShop_group5.demo.controller.WineController;
 import wineShop_group5.demo.model.Wine;
 import wineShop_group5.demo.model.*;
-import wineShop_group5.demo.repository.WineRepository;
 import wineShop_group5.demo.services.WineServices;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

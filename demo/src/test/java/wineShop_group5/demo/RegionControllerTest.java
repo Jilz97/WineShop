@@ -41,8 +41,9 @@ class RegionControllerTest {
 	
 	@Test
 	void all() throws Exception {
-		mockMvc.perform(get("/api/region/")
-				.contentType("aplication/json"));
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/region/all")
+				.contentType("aplication/json"))
+				.andExpect(status().isOk());
 	}
 	@Test
 	void one() throws Exception{

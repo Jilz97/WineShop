@@ -6,19 +6,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "region")
+@Table(name="region")
 public class Region {
 	
 	@Id
 	@Column(name = "id")
 	private int id;
-	
+
 	private String name;
 	private String country;
 	
-	public Region(){
-	
+
+	public Region() {
+		
 	}
+
+	
+	
 
 	public Region(int id, String name, String country) {
 		super();
@@ -26,8 +30,6 @@ public class Region {
 		this.name = name;
 		this.country = country;
 	}
-
-
 
 	public int getId() {
 		return id;

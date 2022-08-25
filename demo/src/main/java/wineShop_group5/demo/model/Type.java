@@ -1,12 +1,11 @@
 package wineShop_group5.demo.model;
 
-import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import wineShop_group5.demo.repository.TypeRepository;
+
 
 @Entity
 

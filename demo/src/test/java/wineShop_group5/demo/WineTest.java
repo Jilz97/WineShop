@@ -43,7 +43,7 @@ class WineTest {
 	private ObjectMapper objectMapper;
 	
 	Type type = new Type(5, "Red");
-	Winery winery = new Winery(1,"Teso La Monja");
+	Winery winery = new Winery("Teso La Monja");
     Region region = new Region(1, "Toro", "España");
     Wine wine = new Wine(1,"Tinto", "2002", 4.3f, 45, 38, "2", "2", winery, type, region);
 

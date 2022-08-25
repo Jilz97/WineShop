@@ -12,41 +12,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import wineShop_group5.demo.model.Region;
 import wineShop_group5.demo.model.Type;
-import wineShop_group5.demo.repository.TypeRepository;
+import wineShop_group5.demo.service.TypeService;
 
 @RestController
 @RequestMapping("/api/type")
 public class TypeController {
 	@Autowired
-	TypeRepository TypeRepository;
+	TypeService typeService;
 	
 	@GetMapping("/all")
 	public List<Type> getAllType() {
-		return TypeRepository.findAll();
-		
+		return typeService.getAllType();
+				
 	}
 	@GetMapping("/{id}")
 	public Type getTypeId(@PathVariable Integer id) throws Exception{
-	return TypeRepository.findById(id).orElseThrow(()-> new Exception("Not found"));
+	return typeService.getTypeId(id);
+			//.orElseThrow(()-> new Exception("Not found"));
 	}
 
 	@PostMapping("/create")
 	public Type createType (@RequestBody Type type){
-		TypeRepository.save(type);
+		typeService.createType(type);
 		return type;
 	}
 
 	@PutMapping("/update/{id}")
 	public Type updateType(@PathVariable int id, @RequestBody Type type) throws Exception{
-		Type type1 = getTypeId(id);
-		type1.setName(type.getName());
-		return TypeRepository.save(type1);
+		return typeService.updateType(id, type);
 	}
 	@DeleteMapping("/delete/{id}")
 	public String deleteType(@PathVariable int id){
-		TypeRepository.deleteById(id);
-		return"Type" + id + "has been deleted";
+		typeService.deleteType(id);
+		return "Type" + id + "has been deleted";
 	}
+	
 }

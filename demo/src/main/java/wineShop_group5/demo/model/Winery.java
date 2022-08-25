@@ -1,6 +1,8 @@
 package wineShop_group5.demo.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -12,8 +14,10 @@ public class Winery {
 	
 	
 	@Id
-	private Integer id;
-	@NotNull(message= "It can't be null")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+    @NotNull(message= "It can't be null")
 	@NotBlank(message="It must have a name")
 	private String name;
 	
@@ -21,21 +25,21 @@ public class Winery {
 		
 	}
 
-	public Winery(Integer id, String name) {
+	public Winery(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
-
-	public Winery(String name) {
+	public Winery(String name){
 		this.name = name;
 	}
-	
-	public Integer getId() {
+
+	public Long getId() {
+
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

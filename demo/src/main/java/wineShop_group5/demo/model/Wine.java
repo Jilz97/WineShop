@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.Range;
 
+
 @Entity
 @Table(name = "wine")
 public class Wine {

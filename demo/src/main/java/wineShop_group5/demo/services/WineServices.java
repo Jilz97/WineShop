@@ -38,7 +38,6 @@ public class WineServices {
 		wine1.setAcidity(wine.getAcidity());
 		return wineRepository.save(wine1);
 		// return new ResponseEntity<>(wine,HttpStatus.OK);
-
 	}
 
 	public void deleteWine(int id) {

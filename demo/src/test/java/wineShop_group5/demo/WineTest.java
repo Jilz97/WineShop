@@ -3,16 +3,13 @@ package wineShop_group5.demo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -47,7 +44,6 @@ class WineTest {
     Region region = new Region(1, "Toro", "España");
     Wine wine = new Wine(1,"Tinto", "2002", 4.3f, 45, 38, "2", "2", winery, type, region);
 
-	// Test all Wines
 	@Test
 	void allWinesTest() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/wine/all").contentType("application/json"))

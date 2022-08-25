@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -65,6 +68,10 @@ public class WineServices {
 	
 	//Get Best bang rating-price (Opinion -> precio)
 	
+	public List<Wine> findByBang(Integer top) {
+		Page<Wine> listOfWines = wineRepository.findAll(PageRequest.of(0,top,Sort.by("price").ascending().and(Sort.by("rating").descending())));
+		return listOfWines.getContent();
+	}
 	
 	
 	

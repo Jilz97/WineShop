@@ -52,18 +52,13 @@ public class WineryController {
 	}
 
 	// Delete
+	
 	@DeleteMapping("/delete/{identity}")
 	public ResponseEntity<String> delete(@PathVariable("identity") Long id) {
 		wineryService.delete(id);
 		return new ResponseEntity<>("Winery was deleted", null, 204);
-<<<<<<< HEAD
-	}
-
-=======
 
 	}
-	
->>>>>>> samyr
 }
 
 

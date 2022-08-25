@@ -14,7 +14,9 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -36,7 +38,7 @@ public class WineryControllerTest {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	@MockBean
+	@Mock
 	WineryService wineryService;
 
 	// Get all
@@ -56,11 +58,12 @@ public class WineryControllerTest {
 
 	// test post
 	@Test
+	@WithMockUser(username = "user", roles= {"USER"})
 	void postWinaryAPI() throws Exception {
 		ObjectMapper mapa = new ObjectMapper();
 		mapa.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapa.writer().withDefaultPrettyPrinter();
-		String requestJson = ow.writeValueAsString(new Winery());
+		String requestJson = ow.writeValueAsString(new Winery("new"));
 
 		mvc.perform(post("/api/winery/create").contentType(MediaType.APPLICATION_JSON).content(requestJson))
 				.andExpect(status().isCreated());
@@ -68,6 +71,7 @@ public class WineryControllerTest {
 
 	// Test Update
 	@Test
+	@WithMockUser(username = "user", roles= {"USER"})
 	void updateWinaryTestApi() throws Exception {
 
 		ObjectMapper mapa = new ObjectMapper();
@@ -82,6 +86,7 @@ public class WineryControllerTest {
 	// delete test
 
 	@Test
+	@WithMockUser(username = "admin", roles= {"ADMIN"})
 	void deleteWinreyAPI() throws Exception {
 		mvc.perform(delete("/api/winery/delete/{identity}", 512).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().is2xxSuccessful());

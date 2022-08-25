@@ -38,6 +38,15 @@ public class RecommendationControllerTest {
 					.andExpect(status().isOk());
 	}
 	
+	//Test Bang by Rate
+	@Test
+	public void getAllBangWines() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/api/recommend/bang")
+				.accept(MediaType.APPLICATION_JSON))
+					.andDo(print())
+					.andExpect(status().isOk());
+	}
+	
 	
 	//Test Vintage Wines
 	@Test

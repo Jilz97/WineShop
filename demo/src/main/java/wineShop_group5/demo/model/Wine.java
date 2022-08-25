@@ -178,7 +178,5 @@ public class Wine {
 				+ ", type=" + type + ", region=" + region + "]";
 	}
 
-
-
     
 }

@@ -52,10 +52,11 @@ class WineTest {
 	// Test get Wine by Id
 	@Test
 	void idOne() throws Exception {
-		Wine wine = new Wine();
-		given(wineServices.getWineId(1)).
-		mockMvc.perform(get("/api/wine/1").contentType(MediaType.APPLICATION_JSON)).content(wine).andExpect(jsonPath("$.id", is(1)))
-				.andExpect(jsonPath("$.name", is("Tinto")));
+		Wine wine2 = new Wine();
+		wine2.setId(11);
+		given(wineServices.getWineId(11)).willReturn(wine2);
+		mockMvc.perform(get("/api/wine/11").contentType(MediaType.APPLICATION_JSON)).andExpect(jsonPath("$.id", is(11)));
+				//.andExpect(jsonPath("$.name", is("Tinto")));
 	}
 
 	// Test create

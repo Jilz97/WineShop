@@ -20,14 +20,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import wineShop_group5.demo.controller.RegionController;
 import wineShop_group5.demo.model.Region;
-import wineShop_group5.demo.repository.RegionRepository;
 import wineShop_group5.demo.services.RegionService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -45,8 +41,9 @@ class RegionControllerTest {
 	
 	@Test
 	void all() throws Exception {
-		mockMvc.perform(get("/api/region/")
-				.contentType("aplication/json"));
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/region/all")
+				.contentType("aplication/json"))
+				.andExpect(status().isOk());
 	}
 	@Test
 	void one() throws Exception{
@@ -70,6 +67,8 @@ class RegionControllerTest {
 		Region region = new Region();
 		region.setName("prova");
 		region.setId(200);
+		region.setCountry("prova");
+		
 		
 		Mockito.when(regionService.saveRegion(region)).thenReturn(region);
 				
@@ -79,25 +78,26 @@ class RegionControllerTest {
 		
 		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("prova")));
 	}
-/*
+
 	@Test
 	@WithMockUser(username = "user", roles= {"USER"})
 	void updateRegionTest() throws Exception{
 		Region region = new Region();
 		region.setName("prova");
-		region.setId(100);
-		Mockito.when(regionService.updateRegion(100,region)).thenReturn(region);
+		region.setId(10);
+		region.setCountry("prova");
 		
+		Mockito.when(regionService.updateRegion(10,region)).thenReturn(region);
 		
-		
-		ResultActions response=mockMvc.perform(put("/api/region/update")
+				
+		ResultActions response=mockMvc.perform(put("/api/region/update/{id}",10)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(region)));
 		
 		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", is("prova")));
 				
 	}
-*/
+
 	@Test
 	@WithMockUser(username = "admin", roles= {"ADMIN"})
 	void deleteRegionTest() throws Exception{

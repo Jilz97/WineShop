@@ -3,16 +3,14 @@ package wineShop_group5.demo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -27,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.CoreMatchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -47,7 +45,6 @@ class WineTest {
     Region region = new Region(1, "Toro", "España");
     Wine wine = new Wine(1,"Tinto", "2002", 4.3f, 45, 38, "2", "2", winery, type, region);
 
-	// Test all Wines
 	@Test
 	void allWinesTest() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/wine/all").contentType("application/json"))
@@ -59,12 +56,13 @@ class WineTest {
 	void idOne() throws Exception {
 		wine.setId(11);
 		given(wineServices.getWineId(11)).willReturn(wine);
-		mockMvc.perform(get("/api/wine/11").contentType(MediaType.APPLICATION_JSON)).andExpect(jsonPath("$.id", is(11)));
-				//.andExpect(jsonPath("$.name", is("Tinto")));
+		mockMvc.perform(get("/api/wine/11")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.id", is(11)));
 	}
-
 	// Test create
 	@Test
+	@WithMockUser(username = "user", roles= {"USER"})
 	public void addWineTest() throws Exception {
 		wine.setId(7550);
 		wine.setName("createTest");
@@ -79,6 +77,7 @@ class WineTest {
 
 	// test update
 	@Test
+	@WithMockUser(username = "user", roles= {"USER"})
 	public void updateWineTest() throws Exception {
 		wine.setName("prova2");
 		wine.setId(5);
@@ -93,6 +92,7 @@ class WineTest {
 
 	// Test delete
 	@Test
+	@WithMockUser(username = "admin", roles= {"ADMIN"})
 	public void deleteWineTest() throws Exception {
 		int id = 2;
 		willDoNothing().given(wineServices).deleteWine(id);
